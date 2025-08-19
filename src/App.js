@@ -61,7 +61,7 @@ function Content({ setItems }) {
         value={id}
         onChange={(e) => setId(e.target.value)}
         type="text"
-        style={{ width: '50px' }}
+        style={{ width: '50px', textAlign: 'center' }}
       />
       <Button
         onClick={addToList}
