@@ -129,7 +129,14 @@ function List({
         >
           {id}
         </button>
-        <p>{title}</p>
+        <p
+          style={{
+            fontSize: '20px',
+            fontWeight: '300',
+          }}
+        >
+          {title}
+        </p>
       </div>
       <div className="list-right">
         <button
