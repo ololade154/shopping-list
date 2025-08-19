@@ -9,14 +9,16 @@
 }
 
 .shopping-list {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 500px;
   margin: 50px auto;
+
   background-color: #000;
   padding: 5px 2px;
+  border-radius: 5px;
 }
 .header {
-  color: #fff;
+  color: #ffffff99;
   text-align: center;
   font-size: 40px;
   font-weight: 600;
@@ -39,5 +41,14 @@
   border-radius: 3px;
 }
 .list {
+  display: flex;
+  justify-content: space-between;
   color: #fff;
+  border-bottom: 1px solid #ffd700;
+  margin-top: 2rem;
+  padding: 3px 15px;
+}
+.list-left {
+  display: flex;
+  gap: 0.5rem;
 }

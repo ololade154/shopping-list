@@ -22,11 +22,14 @@ function App() {
 }
 function Container() {
   const [items, setItems] = useState([]);
+  const removeItem = (id) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  };
   return (
     <div className="shopping-list">
       <Header />
       <Content setItems={setItems} />
-      <ShoppingList lists={items} />
+      <ShoppingList lists={items} removeItem={removeItem} />
     </div>
   );
 }
@@ -37,11 +40,11 @@ function Content({ setItems }) {
   const [title, setTitle] = useState('');
   const [id, setId] = useState('');
   const addToList = () => {
-    console.log(title, id, 'id');
     setItems((prev) => [...prev, { title, id }]);
     setId('');
     setTitle('');
   };
+
   return (
     <div className="content">
       <input
@@ -50,7 +53,7 @@ function Content({ setItems }) {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{ width: '90px' }}
+        style={{ width: '170px' }}
       />
       <input
         className="input-field"
@@ -58,7 +61,7 @@ function Content({ setItems }) {
         value={id}
         onChange={(e) => setId(e.target.value)}
         type="text"
-        style={{ width: '90px' }}
+        style={{ width: '50px' }}
       />
       <Button
         onClick={addToList}
@@ -92,20 +95,58 @@ function Button({
     </button>
   );
 }
-function ShoppingList({ lists }) {
+function ShoppingList({ lists, removeItem }) {
   return (
     <div>
       {lists.map((list) => (
-        <List id={list.id} name={list.name} key={list.id} />
+        <List
+          id={list.id}
+          title={list.title}
+          key={list.id}
+          removeItem={removeItem}
+        />
       ))}
     </div>
   );
 }
-function List({ name, id }) {
+function List({
+  title,
+  id,
+  removeItem,
+  width = '20px',
+  backgroundColor = '#FFD700',
+  border = 'none',
+  fontSize = '20px',
+  fontWeight = '500',
+  color = '#FFD700',
+}) {
   return (
     <div className="list">
-      <p>{name}</p>
-      <button onClick={() => console.log(id, 'id')}>X</button>
+      <div className="list-left">
+        <button
+          className="button"
+          style={{ width, backgroundColor, border, fontSize, fontWeight }}
+        >
+          {id}
+        </button>
+        <p>{title}</p>
+      </div>
+      <div className="list-right">
+        <button
+          onClick={() => removeItem(id)}
+          className="button"
+          style={{
+            width,
+            border,
+            fontSize: '18px',
+            fontWeight,
+            color,
+            backgroundColor: 'transparent',
+          }}
+        >
+          X
+        </button>
+      </div>
     </div>
   );
 }
